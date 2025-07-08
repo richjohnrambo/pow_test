@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"math/rand"
 	"strconv"
@@ -22,11 +23,25 @@ func main() {
 		nonce := rand.Int()
 		data := []byte(name + strconv.Itoa(nonce))
 		hash := sha256.Sum256(data)
-		var shastr1 = fmt.Sprintf("%x", hash)
-		if shastr1[0:1] == "0000" {
+		var shastr1 = hex.EncodeToString(hash[:])
+		if shastr1[0:4] == "0000" {
 			fmt.Println(shastr1)
 			end := time.Now().UnixMilli()
-			fmt.Printf("time cost, %d\n", end-begin)
+			fmt.Printf("0000 time cost, %d ms \n", end-begin)
+			break
+		}
+	}
+
+	begin = time.Now().UnixMilli()
+	for {
+		nonce := rand.Int()
+		data := []byte(name + strconv.Itoa(nonce))
+		hash := sha256.Sum256(data)
+		var shastr1 = hex.EncodeToString(hash[:])
+		if shastr1[0:5] == "00000" {
+			fmt.Println(shastr1)
+			end := time.Now().UnixMilli()
+			fmt.Printf("00000 time cost, %d ms \n", end-begin)
 			break
 		}
 	}
