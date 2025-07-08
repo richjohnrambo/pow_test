@@ -26,6 +26,7 @@ func main() {
 		var shastr1 = hex.EncodeToString(hash[:])
 		if shastr1[0:4] == "0000" {
 			fmt.Println(shastr1)
+			fmt.Println(name + strconv.Itoa(nonce))
 			end := time.Now().UnixMilli()
 			fmt.Printf("0000 time cost, %d ms \n", end-begin)
 			break
@@ -40,6 +41,7 @@ func main() {
 		var shastr1 = hex.EncodeToString(hash[:])
 		if shastr1[0:5] == "00000" {
 			fmt.Println(shastr1)
+			fmt.Println(name + strconv.Itoa(nonce))
 			end := time.Now().UnixMilli()
 			fmt.Printf("00000 time cost, %d ms \n", end-begin)
 			break
